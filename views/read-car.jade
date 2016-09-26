@@ -1,0 +1,27 @@
+.col-sm-12
+    .page-header
+       h1.text-center Read Car
+
+    .row
+        .col-sm-4
+            form(name='selectCarForm', ng-submit='deleteCar();', novalidate='')
+                .form-group
+                    label Select car by id:
+                    select.form-control(ng-model='carSelect.selectedCar', ng-change='showCar();', required='')
+                        option(ng-repeat='car in carSelect.options', value='{{ car.url }}') {{ car.model }}
+                .form-group
+                    label Click to delete a car:
+                    button.btn.btn-block.btn-danger(type='submit', ng-disabled='selectCarForm.$invalid') Delete!
+        .col-sm-8.well(ng-show='carPanelIsVisible')
+            .panel.panel-primary
+                .panel-heading
+                    h3.panel-title {{ car.automotiveGroup }} {{ car.model }}
+                .panel-body
+                    .col-sm-4
+                        p Year: {{ car.year }}
+                        p Mileage: {{ car.mileage }}
+                        p {{ {true: &apos;car was in an accident&apos;, false: &apos;car was not in an accident&apos;}
+                            [car.crash] }}
+                    .col-sm-8
+                        a(ng-repeat='image in car.images', ng-href='{{ image }}', target='_blank')
+                            img.img-car-read.img-thumbnail(ng-src='{{ image }}')

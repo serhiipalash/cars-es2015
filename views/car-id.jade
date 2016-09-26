@@ -1,0 +1,20 @@
+.col-sm-12
+    .page-header
+        h1.text-center Info for specific car
+.col-sm-12
+    div.panel.panel-primary
+        div.panel-heading
+            h3.panel-title #{automotiveGroup} #{model}
+        div.panel-body
+            .col-sm-3.well
+                p Year: #{year}
+                p Mileage: #{mileage} km
+                if crash
+                    p Car was in an accident
+                else
+                    p Car was not in an accident
+                p id: #{id}
+            .col.sm-9
+                each image in images
+                    a(href=image, target='_blank')
+                        img.img-car-id.img-thumbnail(src=image)

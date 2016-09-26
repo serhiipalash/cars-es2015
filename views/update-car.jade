@@ -1,0 +1,40 @@
+.col-sm-12
+    .page-header
+        h1.text-center Update Car
+    form.well(name='updateCarForm', ng-controller='updateCarCtrl', ng-submit='updateCar();', novalidate='')
+        .row.form-group
+            .col-sm-4.col-sm-offset-8.form-group
+                label Choose car:
+                select.form-control(ng-model='carSelect.selectedCar', ng-change='showCar();')
+                    option(ng-repeat='car in carSelect.options', value='{{ car.url }}') {{ car.model }}
+        .row.form-group
+            .col-sm-4.form-group
+                label Automotive group:
+                input.form-control(name='automotive-group', type='text', ng-model='car.automotiveGroup', required='')
+            .col-sm-4.form-group
+                label Model:
+                input.form-control(name='model', type='text', ng-model='car.model', required='')
+            .col-sm-4.form-group
+                label Year:
+                select.form-control(name='select-year', ng-model='car.year', ng-options='year for year in validYears',
+                required='')
+        .row.form-group
+            .col-sm-3.form-group
+                label Car mileage (land mile):
+                input.form-control(name='mileage', type='number', ng-model='car.mileage', required='')
+            .col-sm-2.form-group
+                label Participating in road accident: {{ {true: &apos;yes&apos;, false: &apos;no&apos;}[car.crash] }}
+                input(name='crash', type='checkbox', ng-model='car.crash')
+            .col-sm-2.form-group
+                label Photo:
+                input(name='file-image', type='file', accept='image/*', multiple='', ng-model-instant='',
+                onchange='angular.element(this).scope().imageUpload(event);')
+            .col-sm-5.form-group
+                .car-img-block.pull-left(ng-repeat='image in car.images', ng-init='showRemoveBtn = false',
+                ng-mouseenter='showRemoveBtn = true', ng-mouseleave='showRemoveBtn = false')
+                    button.remove-btn.close(type='button', ng-show='showRemoveBtn', ng-click='removeImage();') &times
+                    img.img-thumbnail(ng-src='{{ image }}')
+        .row.form-group
+            .col-sm-4
+                label Click to update a car:
+                button.btn.btn-primary.btn-block(type='submit', ng-disabled='updateCarForm.$invalid') Update car

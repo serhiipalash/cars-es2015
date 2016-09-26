@@ -1,0 +1,24 @@
+.col-sm-12
+    .page-header
+        h1.text-center Car List
+
+    table.table.table-hover
+        thead
+            tr
+                th #
+                th Avtomotive Group
+                th Model
+                th Year
+                th Mileage
+                th Crash
+                th Photo
+        tbody
+            tr.car(ng-repeat='car in carList', ng-click='showCar();')
+                td {{ $index + 1 }}
+                td {{ car.automotiveGroup }}
+                td {{ car.model }}
+                td {{ car.year }}
+                td {{ car.mileage }}
+                td {{ {true: &apos;car was in an accident&apos;, false: &apos;car was not in an accident&apos;}[car.crash] }}
+                td
+                    img.img-car.img-thumbnail(ng-repeat='image in car.images', ng-src='{{ image }}')

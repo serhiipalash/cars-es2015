@@ -1,0 +1,33 @@
+.col-sm-12
+    .page-header
+        h1.text-center Create Car
+
+    form.well(name='createCarForm', ng-submit='postNewCar();', novalidate='')
+        .row.form-group
+            .col-sm-4.form-group
+                label Automotive group:
+                input.form-control(name='automotive-group', type='text', ng-model='newCar.automotiveGroup', required='')
+            .col-sm-4.form-group
+                label Model:
+                input.form-control(name='model', type='text', ng-model='newCar.model', required='')
+            .col-sm-4.form-group
+                label Year:
+                select.form-control(name='select-year', ng-model='newCar.year', ng-options='year for year in validYears',
+                required='')
+        .row.form-group
+            .col-sm-3.form-group
+                label Car mileage (land mile):
+                input.form-control(name='mileage', type='number', ng-model='newCar.mileage', required='')
+            .col-sm-2.form-group
+                label Participating in road accident: {{ {true: &apos;yes&apos;, false: &apos;no&apos;}[newCar.crash] }}
+                input(name='crash', type='checkbox', ng-model='newCar.crash')
+            .col-sm-2.form-group
+                label Photo:
+                input(name='file-image', type='file', accept='image/*', multiple='', ng-model-instant='',
+                onchange='angular.element(this).scope().imageUpload(event);')
+            .col-sm-5.form-group
+                img.img-car.img-thumbnail(ng-repeat='image in newCar.images', ng-src='{{ image }}')
+        .row.form-group
+            .col-sm-4
+                label Click to create a car:
+                button.btn.btn-primary.btn-block(type='submit', ng-disabled='createCarForm.$invalid') Create car

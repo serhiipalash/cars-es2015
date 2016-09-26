@@ -1,0 +1,10 @@
+require('angular');
+require('angular-route');
+require('./app');
+require('./routes/route');
+require('./directives/active_link_directive');
+require('./directives/active_theme_directive');
+require('./controllers/car_list_controller');
+require('./controllers/read_car_controller');
+require('./controllers/create_car_controller');
+require('./controllers/update_car_controller');
